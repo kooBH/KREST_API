@@ -1,0 +1,9 @@
+[submodule "lib/WAV"]
+	path = lib/WAV
+	url = https://github.com/koobh/WAV
+[submodule "lib/json"]
+	path = lib/json
+	url = https://github.com/nlohmann/json
+[submodule "bin"]
+	path = bin
+	url = https://github.com/koobh/qtbin

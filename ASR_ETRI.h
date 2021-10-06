@@ -151,7 +151,7 @@ string ASR_ETRI::Request(string filePath){
 
   if (!response.empty()) {
     json ret = json::parse(response);
-    std::cout << ret.dump();
+    //std::cout << ret.dump();
 
     if (ret["result"].get<int>() == -1) {
       //printf("ERROR\n");

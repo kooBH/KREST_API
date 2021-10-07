@@ -79,7 +79,7 @@ list(APPEND INCL
 list(APPEND LINKLIBS
 	#${CMAKE_CURRENT_LIST_DIR}/lib/curl/libcrypto.lib
 	#${CMAKE_CURRENT_LIST_DIR}/lib/curl/libssl.lib
-	${CMAKE_CURRENT_LIST_DIR}/bin/LIBCURL.LIB
+	${CMAKE_CURRENT_LIST_DIR}/bin/libcurl.lib
 	debug ${PROJECT_SOURCE_DIR}/bin/lib/Qt6Cored.lib optimized ${PROJECT_SOURCE_DIR}/bin/lib/Qt6Core.lib
 	debug ${PROJECT_SOURCE_DIR}/bin/lib/Qt6Guid.lib optimized ${PROJECT_SOURCE_DIR}/bin/lib/Qt6Gui.lib
 	debug ${PROJECT_SOURCE_DIR}/bin/lib/Qt6Widgetsd.lib optimized ${PROJECT_SOURCE_DIR}/bin/lib/Qt6Widgets.lib	

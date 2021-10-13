@@ -1,6 +1,6 @@
 #include "KWidgetASR.h"
 
-KWidgetASR::KWidgetASR(std::string key, std::string language) {
+KWidgetASR::KWidgetASR() {
   layout_main.addWidget(&button_load);
   layout_main.addWidget(&label_result);
   this->setLayout(&layout_main);
@@ -8,11 +8,6 @@ KWidgetASR::KWidgetASR(std::string key, std::string language) {
   button_load.setText("load");
   
   label_result.setText("label");
-  
-	asr = new ASR_ETRI(std::string(key), std::string(language));
-
-  
-  QObject::connect(this, &KWidgetASR::signal_load, &KWidgetASR::slot_load);
   QObject::connect(&button_load, &QToolButton::clicked, [&]() {
     QString fileName;
     QFileDialog dialog;
@@ -20,6 +15,20 @@ KWidgetASR::KWidgetASR(std::string key, std::string language) {
       tr("Open Wav File"), ".", tr("something (*.wav)"));
     emit(signal_load(fileName));
     });
+
+  asr = nullptr;
+
+ 
+}
+
+KWidgetASR::KWidgetASR(std::string key, std::string language) {
+  Init(key, language);
+ 
+}
+
+void KWidgetASR::Init(std::string key, std::string language) {
+	asr = new ASR_ETRI(std::string(key), std::string(language));
+  QObject::connect(this, &KWidgetASR::signal_load, &KWidgetASR::slot_load);
 }
 
 KWidgetASR::~KWidgetASR() {

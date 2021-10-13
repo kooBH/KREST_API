@@ -24,8 +24,10 @@ public:
 	QLabel label_result;
 
 	KWidgetASR(std::string key, std::string language);
+	KWidgetASR();
 	~KWidgetASR();
 
+	void Init(std::string key, std::string language);
 	void Load(std::string path);
 
 signals : 

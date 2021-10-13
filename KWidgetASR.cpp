@@ -2,8 +2,16 @@
 
 KWidgetASR::KWidgetASR() {
   layout_main.addWidget(&button_load);
-  layout_main.addWidget(&label_result);
+  layout_main.addWidget(&label_result,Qt::AlignCenter);
+
   this->setLayout(&layout_main);
+
+  QFont font = label_result.font();
+  font.setPointSize(48);
+  label_result.setFont(font);
+
+  label_result.setWordWrap(true);
+  label_result.setAlignment(Qt::AlignCenter);
 
   button_load.setText("load");
   
@@ -38,14 +46,17 @@ KWidgetASR::~KWidgetASR() {
 }
 
 void KWidgetASR::Load(std::string path) {
-
-  emit(signal_load(QString::fromStdString(path)));
+    emit(signal_load(QString::fromStdString(path)));
 
 }
 
 void KWidgetASR::slot_load(QString path) {
+  if (path.isEmpty())
+    return;
   QString result;
   std::string str_path = path.toStdString();
+  label_result.setText("Recognizing...");
+  label_result.repaint();
   std::string ret = asr->Request(str_path);
   result = QString::fromUtf8(ret.c_str());  
 

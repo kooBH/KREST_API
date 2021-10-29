@@ -26,6 +26,8 @@ KWidgetASR::KWidgetASR() {
 
   asr = nullptr;
 
+  this->setEnabled(false);
+
  
 }
 
@@ -37,6 +39,7 @@ KWidgetASR::KWidgetASR(std::string key, std::string language) {
 void KWidgetASR::Init(std::string key, std::string language) {
 	asr = new ASR_ETRI(std::string(key), std::string(language));
   QObject::connect(this, &KWidgetASR::signal_load, &KWidgetASR::slot_load);
+  this->setEnabled(true);
 }
 
 KWidgetASR::~KWidgetASR() {

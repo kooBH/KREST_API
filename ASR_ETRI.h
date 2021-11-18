@@ -11,6 +11,8 @@
 
 #include "json.hpp"
 
+#include <thread>
+#include <atomic>
 
 #define LENFRAME  800
 
@@ -30,19 +32,22 @@ inline string base64_encode(unsigned char const*, unsigned int len);
 class ASR_ETRI {
 
 private:
-
-
   char* openApiURL;
   char* audioFilePath;
 
   string accessKey;
   string languageCode;
 
+  std::thread* thread_asr=nullptr;
+  std::atomic<bool> bool_thread=false;
+
+  
 public:
 
   inline ASR_ETRI(string accessKey, string languageCode);
   inline ~ASR_ETRI();
   inline string Request(string filePath);
+  inline string RequestThread(string filePath);
 };
 
 

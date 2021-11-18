@@ -14,7 +14,6 @@ KWidgetASR::KWidgetASR() {
   label_result.setAlignment(Qt::AlignCenter);
 
   button_load.setText("load");
-  
   label_result.setText("label");
   QObject::connect(&button_load, &QToolButton::clicked, [&]() {
     QString fileName;
@@ -27,13 +26,10 @@ KWidgetASR::KWidgetASR() {
   asr = nullptr;
 
   this->setEnabled(false);
-
- 
 }
 
 KWidgetASR::KWidgetASR(std::string key, std::string language) {
   Init(key, language);
- 
 }
 
 void KWidgetASR::Init(std::string key, std::string language) {
@@ -45,12 +41,11 @@ void KWidgetASR::Init(std::string key, std::string language) {
 KWidgetASR::~KWidgetASR() {
 
   delete asr;
-
 }
 
 void KWidgetASR::Load(std::string path) {
-    emit(signal_load(QString::fromStdString(path)));
-
+  printf("KWidgetASR::Load(%s)\n",path.c_str());
+  emit(signal_load(QString::fromStdString(path)));
 }
 
 void KWidgetASR::slot_load(QString path) {
@@ -62,10 +57,7 @@ void KWidgetASR::slot_load(QString path) {
   label_result.repaint();
   std::string ret = asr->Request(str_path);
   result = QString::fromUtf8(ret.c_str());  
-
  // std::cout << ret<<"\n";
 
   label_result.setText(result);
-
-
 }

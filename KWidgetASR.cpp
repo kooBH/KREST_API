@@ -3,6 +3,7 @@
 KWidgetASR::KWidgetASR() {
   layout_button.addWidget(&button_load);
   layout_button.addWidget(&button_reset);
+  layout_button.addWidget(&label_status);
   layout_main.addLayout(&layout_button);
 
   layout_button.setAlignment(Qt::AlignLeft);
@@ -23,7 +24,6 @@ KWidgetASR::KWidgetASR() {
 
   button_load.setText("load");
   button_reset.setText("reset");
-  label_result.setText("label");
   QObject::connect(&button_load, &QToolButton::clicked, [&]() {
     QString fileName;
     QFileDialog dialog;
@@ -46,7 +46,7 @@ KWidgetASR::KWidgetASR() {
 
 }
 
-KWidgetASR::KWidgetASR(std::string key, std::string language) {
+KWidgetASR::KWidgetASR(std::string key, std::string language):KWidgetASR() {
   Init(key, language);
 }
 
@@ -90,7 +90,7 @@ void KWidgetASR::slot_load(QString path) {
     delete thread_asr;
     thread_asr = nullptr;
   }
-  label_result.setText("Recognizing...");
+  label_status.setText("Recognizing...");
   label_result.repaint();
 
   thread_asr = new std::thread([=] {this->ASR(str_path); });
@@ -112,7 +112,11 @@ void KWidgetASR::ASR(std::string path){
 
 
 void KWidgetASR::slot_update(QString text) {
-  qstr_text.append(QDateTime::currentDateTime().toString("hh:mm:ss")+ " : " +  text + "\n");
-  label_result.setText(qstr_text);
+  //qstr_text.append(QDateTime::currentDateTime().toString("hh:mm:ss")+ " : " +  text + "\n");
+  qstr_text = QString(QDateTime::currentDateTime().toString("hh:mm:ss")+ " : " +  text);
+  //label_result.setText(qstr_text);
+  label_result.append(qstr_text);
+  label_status.setText("");
+
 
 }

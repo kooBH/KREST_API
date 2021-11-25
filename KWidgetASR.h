@@ -19,7 +19,14 @@ class KWidgetASR : public QWidget {
 private :
 	QVBoxLayout layout_main;
 	QHBoxLayout layout_button;
+	QToolButton button_load;
+	QToolButton button_reset;
+	QLabel label_status;
+	QTextBrowser label_result;
+
+
 	QString qstr_text;
+	QScrollBar* sb;
 
 	ASR_ETRI* asr;
 
@@ -27,10 +34,7 @@ private :
 	std::atomic<bool> bool_thread;
 
 public:
-	QToolButton button_load;
-	QToolButton button_reset;
 
-	QTextBrowser label_result;
 
 	KWidgetASR(std::string key, std::string language);
 	KWidgetASR();

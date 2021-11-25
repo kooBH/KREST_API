@@ -52,6 +52,5 @@ signals :
 public slots : 
 	void slot_load(QString path);
 	void slot_update(QString text);
-	void slot_reset();
 
 };

@@ -47,7 +47,7 @@ public:
   inline ASR_ETRI(string accessKey, string languageCode);
   inline ~ASR_ETRI();
   inline string Request(string filePath);
-  inline string RequestThread(string filePath);
+
 };
 
 
@@ -136,7 +136,7 @@ string ASR_ETRI::Request(string filePath){
     curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
     curl_easy_cleanup(curl);
 
-    std::cout << "statusCode : " << statusCode << std::endl;
+   // std::cout << "statusCode : " << statusCode << std::endl;
 
 
     // statusCode

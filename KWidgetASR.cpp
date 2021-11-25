@@ -20,7 +20,8 @@ KWidgetASR::KWidgetASR() {
   label_result.setFont(font);
 
   //label_result.setWordWrap(true);
-  label_result.setAlignment(Qt::AlignCenter);
+  //label_result.setAlignment(Qt::AlignCenter);
+  label_result.setAlignment(Qt::AlignLeft);
 
   button_load.setText("load");
   button_reset.setText("reset");

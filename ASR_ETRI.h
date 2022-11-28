@@ -52,7 +52,10 @@ public:
 
 
 ASR_ETRI::ASR_ETRI(string accessKey_,string languageCode_) {
-  openApiURL = (char*)"https://aiopen.etri.re.kr:8443/WiseASR/Recognition";
+  //openApiURL = (char*)"https://aiopen.etri.re.kr:8443/WiseASR/Recognition";
+  // Updated : 2022.11.28
+  openApiURL = (char*)"http://aiopen.etri.re.kr:8000/WiseASR/Recognition";
+
   accessKey = accessKey_;
   languageCode = languageCode_;
 }
@@ -103,7 +106,8 @@ string ASR_ETRI::Request(string filePath){
   argument["language_code"] = languageCode;
   argument["audio"] = base64_encode(audioBytes, nWrite);
 
-  request["access_key"] = accessKey;
+  // Updated : 2022.11.28
+  //request["access_key"] = accessKey;
   request["argument"] = argument;
 
   CURL* curl;
@@ -117,6 +121,9 @@ string ASR_ETRI::Request(string filePath){
   }
   else {
     responseHeaders = curl_slist_append(responseHeaders, "Content-Type: application/json; charset=UTF-8");
+
+    // Updated : 2022.11.28
+    responseHeaders = curl_slist_append(responseHeaders, ("Authorization: " + accessKey).c_str());
     string requestJson = request.dump();
     long statusCode=-1;
 

@@ -114,7 +114,8 @@ void KWidgetASR::ASR(std::string path){
 
 void KWidgetASR::slot_update(QString text) {
   //qstr_text.append(QDateTime::currentDateTime().toString("hh:mm:ss")+ " : " +  text + "\n");
-  qstr_text = QString(QDateTime::currentDateTime().toString("hh:mm:ss")+ " : " +  text);
+  //qstr_text = QString(QDateTime::currentDateTime().toString("hh:mm:ss")+ " : " +  text);
+  qstr_text = QString(text);
   //label_result.setText(qstr_text);
   label_result.append(qstr_text);
   label_status.setText("");

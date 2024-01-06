@@ -21,10 +21,10 @@ list(APPEND SRC
 	
 list(APPEND INCL
 	${CMAKE_CURRENT_LIST_DIR}
-	${CMAKE_CURRENT_LIST_DIR}/lib/WAV
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/WAV
 	${CMAKE_CURRENT_LIST_DIR}/lib/curl/include/curl
 	${CMAKE_CURRENT_LIST_DIR}/lib/curl/include/openssl
-	${CMAKE_CURRENT_LIST_DIR}/lib/json/single_include/nlohmann
+	${CMAKE_CURRENT_SOURCE_DIR}/lib/json/single_include/nlohmann
 )
 
 if(UNIX AND NOT APPLE)

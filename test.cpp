@@ -18,7 +18,7 @@ int main(int argc, char*argv[]){
 	KWidgetASR widget_main(j["key"].get<std::string>(),j["language"].get<std::string>());
 	
 	widget_main.show();
-	widget_main.Load("speech_male_kor.wav");
+//	widget_main.Load("speech_male_kor.wav");
 
 	
 	return app.exec();

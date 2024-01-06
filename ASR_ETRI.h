@@ -11,6 +11,8 @@
 
 #include "json.hpp"
 
+#include <thread>
+#include <atomic>
 
 #define LENFRAME  800
 
@@ -30,24 +32,30 @@ inline string base64_encode(unsigned char const*, unsigned int len);
 class ASR_ETRI {
 
 private:
-
-
   char* openApiURL;
   char* audioFilePath;
 
   string accessKey;
   string languageCode;
 
+  std::thread* thread_asr=nullptr;
+  std::atomic<bool> bool_thread=false;
+
+  
 public:
 
   inline ASR_ETRI(string accessKey, string languageCode);
   inline ~ASR_ETRI();
   inline string Request(string filePath);
+
 };
 
 
 ASR_ETRI::ASR_ETRI(string accessKey_,string languageCode_) {
-  openApiURL = (char*)"https://aiopen.etri.re.kr:8443/WiseASR/Recognition";
+  //openApiURL = (char*)"https://aiopen.etri.re.kr:8443/WiseASR/Recognition";
+  // Updated : 2022.11.28
+  openApiURL = (char*)"http://aiopen.etri.re.kr:8000/WiseASR/Recognition";
+
   accessKey = accessKey_;
   languageCode = languageCode_;
 }
@@ -98,7 +106,8 @@ string ASR_ETRI::Request(string filePath){
   argument["language_code"] = languageCode;
   argument["audio"] = base64_encode(audioBytes, nWrite);
 
-  request["access_key"] = accessKey;
+  // Updated : 2022.11.28
+  //request["access_key"] = accessKey;
   request["argument"] = argument;
 
   CURL* curl;
@@ -112,6 +121,9 @@ string ASR_ETRI::Request(string filePath){
   }
   else {
     responseHeaders = curl_slist_append(responseHeaders, "Content-Type: application/json; charset=UTF-8");
+
+    // Updated : 2022.11.28
+    responseHeaders = curl_slist_append(responseHeaders, ("Authorization: " + accessKey).c_str());
     string requestJson = request.dump();
     long statusCode=-1;
 
@@ -131,7 +143,7 @@ string ASR_ETRI::Request(string filePath){
     curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
     curl_easy_cleanup(curl);
 
-    std::cout << "statusCode : " << statusCode << std::endl;
+   // std::cout << "statusCode : " << statusCode << std::endl;
 
 
     // statusCode

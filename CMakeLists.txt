@@ -9,6 +9,11 @@ set(INCL)
 set(SRC_Qt)
 set(SRC_Qt_MOC)
 
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/move_contents_to_bin/libcurl.dll
+     DESTINATION ${CMAKE_CURRENT_LIST_DIR}/bin)
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/move_contents_to_bin/libcurl.lib
+     DESTINATION ${CMAKE_CURRENT_LIST_DIR}/bin)
+
 macro(display_elements
 	DISPLAY_MESSAGE
 	LIST_TO_DISPLAY)
